@@ -89,7 +89,7 @@ const Question = () => {
     <Main>
         <div className={styles.Div}>
     
-    <div className={styles.Div2}>Health Profile Setup
+    <div className={styles.Div2}>Add medical History
     <div className={styles.Div3} />
     </div>
   </div>

@@ -5,7 +5,7 @@
     width: 400px;
     padding: 20px;
     border-radius: 0px;
-    border: 2px solid wheat;
+    border: 2px solid rgb(0, 0, 0);
     background-color: transparent;
     backdrop-filter: blur(25px);
     position: relative;
@@ -105,6 +105,8 @@
     position: relative;
     font-family: Inter, sans-serif;
     text-decoration-line: underline;
+    font-weight: 700;
+    font-size: 25px;
     }
     
     .Div3{
@@ -114,3 +116,5 @@
     width: 178px;
     height: 6px;
     }
+
+    

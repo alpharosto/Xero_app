@@ -126,12 +126,13 @@ padding: 11px 80px 34px 22px;
 }
 
 
-
 .Div2{
-position: relative;
-font-family: Inter, sans-serif;
-text-decoration-line: underline;
-}
+  position: relative;
+  font-family: Inter, sans-serif;
+  text-decoration-line: underline;
+  font-weight: 700;
+  font-size: 25px;
+  }
 
 .Div3{
 position: relative;
