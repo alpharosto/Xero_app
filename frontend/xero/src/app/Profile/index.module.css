@@ -1,0 +1,78 @@
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    width: 400px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 2px solid black; /* Set border color to black */
+    background-color: white; /* Set background color to white */
+    backdrop-filter: blur(25px);
+    position: relative;
+  };
+     
+.Div {
+    display: flex;
+    flex-direction: column;
+    stroke-width: 1px;
+    stroke: #000;
+    overflow: hidden;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    display: flex;
+    min-height: 79px;
+    width: 100%;
+    align-items: start;
+    font-size: 18px;
+    color: #000;
+    font-weight: 700;
+    padding: 11px 80px 34px 22px;
+    }
+    
+    
+    
+    .Div2{
+    position: relative;
+    font-family: Inter, sans-serif;
+    text-decoration-line: underline;
+    color: black;
+    }
+    
+    .Div3{
+    position: relative;
+    background-color: #00b3ff;
+    margin-top: 9px;
+    width: 178px;
+    height: 6px;
+    }
+    .img{
+      padding-top:20px;
+      padding-left: 5%;
+      flex-direction: left;
+    }
+    .above{
+      display: flex;
+      flex-direction: left;
+      
+    }
+    .age{
+      color: #000;
+      font-weight: 400;
+      padding-left: 2rem;
+
+      /* padding-top: 3rem; */
+    }
+
+
+    .name{
+      color: #000;
+      padding-left: 10rem;
+      padding-top: 1.5rem;
+      font-weight: 700;
+    }
+.tittle{
+  color: #000;
+  padding-left: ;
+}
