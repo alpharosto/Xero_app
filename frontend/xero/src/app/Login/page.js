@@ -1,7 +1,41 @@
 // components/LoginForm.js
 "use client";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function LoginForm() {
+  const sms = async () => {
+    // const fromdata = new FormData();
+
+    // fromdata.append("from", "Vonage APIs");
+    // fromdata.append("text", "A text message sent using the Vonage SMS API");
+    // fromdata.append("to", 917709551702);
+    // fromdata.append("api_key", "5f08d448");
+    // fromdata.append("api_secret", "cOEXGJkYWF5PZWZq");
+
+    try {
+      const resp = await axios.post("http://localhost:3001/send-sms", {
+        recipient: [917709551702],
+        message: "hi i am gaurav",
+      });
+      console.log("resp", resp);
+
+      // const resp1 = await axios.post("http://localhost:3001/sendsms2", {
+      //   recipient: [919284637275],
+      //   message: "hi i am Sayali",
+      // });
+      // console.log("resp1===", resp1);
+
+      // const resp2 = await axios.post("http://localhost:3001/send-sms", {
+      //   recipient: [917709551702],
+      //   message: "hi i am gaurav",
+      // });
+      // console.log(resp2);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <main>
       <header>
@@ -25,7 +59,7 @@ export default function LoginForm() {
           </div>
           <a href="#">Forgot Password ?</a>
         </div>
-        <button>Login</button>
+        <button onClick={sms}>Login</button>
         <div className="new_account">
           Don't have an account? <a href="Signup">Sign up</a>
         </div>
