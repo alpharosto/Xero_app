@@ -30,7 +30,13 @@ const Profile = () => {
     </div>
   </div>
 <div className={styles.comp1}>
-    
+  <div className={styles.tittle}>
+    personal 
+  </div>
+    Male
+    92345 23456
+    mali nagar, chakur.
+   
 </div>
 
     </div>
