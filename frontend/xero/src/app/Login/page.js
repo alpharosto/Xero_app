@@ -1,38 +1,65 @@
 // components/LoginForm.js
 "use client";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import styles from "./index.module.css";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const sms = async () => {
-    // const fromdata = new FormData();
+  // const sms = async () => {
+  //   // const fromdata = new FormData();
 
-    // fromdata.append("from", "Vonage APIs");
-    // fromdata.append("text", "A text message sent using the Vonage SMS API");
-    // fromdata.append("to", 917709551702);
-    // fromdata.append("api_key", "5f08d448");
-    // fromdata.append("api_secret", "cOEXGJkYWF5PZWZq");
+  //   // fromdata.append("from", "Vonage APIs");
+  //   // fromdata.append("text", "A text message sent using the Vonage SMS API");
+  //   // fromdata.append("to", 917709551702);
+  //   // fromdata.append("api_key", "5f08d448");
+  //   // fromdata.append("api_secret", "cOEXGJkYWF5PZWZq");
 
+  //   try {
+  //     const resp = await axios.post("http://localhost:3001/send-sms", {
+  //       recipient: [917709551702],
+  //       message: "hi i am gaurav",
+  //     });
+  //     console.log("resp", resp);
+
+  //     // const resp1 = await axios.post("http://localhost:3001/sendsms2", {
+  //     //   recipient: [919284637275],
+  //     //   message: "hi i am Sayali",
+  //     // });
+  //     // console.log("resp1===", resp1);
+
+  //     // const resp2 = await axios.post("http://localhost:3001/send-sms", {
+  //     //   recipient: [917709551702],
+  //     //   message: "hi i am gaurav",
+  //     // });
+  //     // console.log(resp2);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const login = async () => {
+    console.log("name==", username);
+    console.log("password==", password);
     try {
-      const resp = await axios.post("http://localhost:3001/send-sms", {
-        recipient: [917709551702],
-        message: "hi i am gaurav",
+      const response = await axios.post("http://localhost:5000/user/login", {
+        email: username,
+        password: password,
       });
-      console.log("resp", resp);
-
-      // const resp1 = await axios.post("http://localhost:3001/sendsms2", {
-      //   recipient: [919284637275],
-      //   message: "hi i am Sayali",
+      const id = response.data.user._id;
+      // router.push({
+      //   pathname: "/HealthProfile",
+      //   query: { data: id },
       // });
-      // console.log("resp1===", resp1);
-
-      // const resp2 = await axios.post("http://localhost:3001/send-sms", {
-      //   recipient: [917709551702],
-      //   message: "hi i am gaurav",
-      // });
-      // console.log(resp2);
+      console.log("response==", id);
+      router.push("/HealthProfile/" + id);
     } catch (error) {
-      console.log(error);
+      console.log("error==", error);
     }
   };
 
@@ -43,14 +70,30 @@ export default function LoginForm() {
       </header>
       <form>
         <div className="form_wrapper">
-          <input id="input" type="text" required />
-          <label htmlFor="input">Firstname</label>
-          <i className="material-icons">person</i>
+          <input
+            id="input"
+            type="email"
+            required
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <label htmlFor="input">UserName</label>
+          {/* <i className="material-icons">person</i> */}
         </div>
         <div className="form_wrapper">
-          <input id="password" type="password" required />
+          <input
+            id="password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
           <label htmlFor="password">Password</label>
-          <i className="material-icons">lock</i>
+          {/* <i className="material-icons">lock</i> */}
         </div>
         <div className="remember_box">
           <div className="remember">
@@ -59,19 +102,15 @@ export default function LoginForm() {
           </div>
           <a href="#">Forgot Password ?</a>
         </div>
-        <button onClick={sms}>Login</button>
+        <div onClick={login} className={styles.button}>
+          Login
+        </div>
         <div className="new_account">
           Don't have an account? <a href="Signup">Sign up</a>
         </div>
       </form>
 
       <style jsx>{`
-        * {
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
-          font-family: sans-serif;
-        }
 
         body {
           display: flex;
