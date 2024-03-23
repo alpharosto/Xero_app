@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const userRoutes = require("./routes/user_routes");
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -15,9 +16,12 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
+//import routes
+app.use("/user", userRoutes);
+
 mongoose
   .connect(
-    "mongodb+srv://gauravkamble:yvLfKLGf5YymifxT@dhanwantri.0qhmusz.mongodb.net/?retryWrites=true&w=majority&appName=Dhanwantri"
+    "mongodb+srv://gauravkamble704:trfTqqoSgIzmJsG5@cluster0.dcpe2fg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => {
     app.listen(5000, () => {
