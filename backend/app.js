@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user_routes");
+const patientRoutes = require("./routes/patient_routes");
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 //import routes
 app.use("/user", userRoutes);
+app.use("/patient", patientRoutes);
 
 mongoose
   .connect(
