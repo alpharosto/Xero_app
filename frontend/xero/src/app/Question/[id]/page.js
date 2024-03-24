@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Main = styled.div`
   margin-left: auto;
@@ -95,15 +96,17 @@ export default function Page({ params }) {
   const patientId = params.id;
   console.log(patientId);
 
+  const router = useRouter();
+
   const question = async () => {
     try {
       const responce = await axios.post(
         "http://localhost:5000/patient/addhealthprofile2/" + patientId,
         {
-          anychronicdiseases: "no",
-          anyallergies: "no",
-          anyundergoingtreatment: "no",
-          anycurrentmedications: "no",
+          anychronicdiseases: chronic,
+          anyallergies: serious,
+          anyundergoingtreatment: symptoms,
+          anycurrentmedications: medications,
         }
       );
       console.log("responce", responce);
@@ -130,6 +133,10 @@ export default function Page({ params }) {
           className={styles.input}
           rows={4}
           placeholder="Enter your address"
+          value={chronic}
+          onChange={(e) => {
+            setChronic(e.target.value);
+          }}
         />
       </div>
       <div className={styles.block}>
@@ -142,6 +149,10 @@ export default function Page({ params }) {
           className={styles.input}
           rows={4}
           placeholder="Enter your input"
+          value={serious}
+          onChange={(e) => {
+            setSerious(e.target.value);
+          }}
         />
       </div>
       <div className={styles.block}>
@@ -154,6 +165,10 @@ export default function Page({ params }) {
           className={styles.input}
           rows={4}
           placeholder="Enter your address"
+          value={symptoms}
+          onChange={(e) => {
+            setSymptoms(e.target.value);
+          }}
         />
       </div>
       <div className={styles.block}>
@@ -166,9 +181,13 @@ export default function Page({ params }) {
           className={styles.input}
           rows={4}
           placeholder="Enter your address"
+          value={medications}
+          onChange={(e) => {
+            setMedications(e.target.value);
+          }}
         />
       </div>
-      <div className={styles.block}>
+      {/* <div className={styles.block}>
         <First>
           Are there any specific areas of your health that you would like to
           focus on during your checkup or consultation?
@@ -178,8 +197,12 @@ export default function Page({ params }) {
           className={styles.input}
           rows={4}
           placeholder="Enter your address"
+          value={medications}
+          onChange={(e) => {
+            setMedications(e.target.value);
+          }}
         />
-      </div>
+      </div> */}
       <div className={styles.button} onClick={question}>
         Continue
       </div>

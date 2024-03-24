@@ -11,7 +11,7 @@
 }
 
 .above {
-  background: #1389ff;
+  background: #E3EEFA;
   width: 398px;
   height: 8rem;
 }
@@ -19,7 +19,7 @@
 .card1 {
   margin: 20px;
   margin-top: 40px;
-  background: #2c02b54a;
+  background: rgb(42, 179, 229);
   width: 360px;
   height: 11rem;
   border-radius: 10px;
@@ -34,7 +34,7 @@
 
 .notify {
 
-  background-color: rgb(69, 231, 177);
+  background-color: rgb(115, 239, 198);
   margin: 12px;
   padding: 1rem;
   height: 7rem;
@@ -54,7 +54,6 @@
 .Column {
   display: flex;
   background-color: #005cb9;
-
   flex-direction: column;
   line-height: normal;
   width: 69%;

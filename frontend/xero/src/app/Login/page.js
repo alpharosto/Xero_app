@@ -72,15 +72,15 @@ export default function LoginForm() {
         <div className="form_wrapper">
           <input
             id="input"
-            type="email"
+            type="text"
             required
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
-          <label htmlFor="input">UserName</label>
-          {/* <i className="material-icons">person</i> */}
+          <label htmlFor="input">E-mail</label>
+          {/* <i className="material-icons">lock</i> */}
         </div>
         <div className="form_wrapper">
           <input

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page({ params }) {
   const patientId = params.id;
@@ -19,9 +21,8 @@ export default function Page({ params }) {
       );
       setData(response.data.patient);
       console.log("healthproffile2", response.data.patient.healthprofile2[0]);
-      setHealthprofile(response.data.patient.healthprofile2[0]);
+      setHealthprofile(response.data.patient.healthprofile);
       console.log("responces", response);
-      6;
     } catch (err) {
       console.log(err);
     }
@@ -36,10 +37,24 @@ export default function Page({ params }) {
   const sos = async () => {
     try {
       const response = await axios.post(
-        "https://4687-115-247-30-146.ngrok-free.app/api/send_message",
+        "http://localhost:5000/api/send_message",
         {
-          to_numbers: ["+919352894822", "+917709551702"],
-          message_body: "Emergency!",
+          to_numbers: [
+            "+919352894822",
+            "+919284637275",
+            "+917709551702",
+            "+91987583129",
+          ],
+          message_body:
+            "Emergency to this user" +
+            "https://www.google.com/maps?q=16.8451219,74.6020639&z=17&hl=en" +
+            "Database : " +
+            `http://localhost:3000/Profile/${patientId}`,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -48,6 +63,12 @@ export default function Page({ params }) {
       console.log(err);
     }
   };
+
+  function calculateBMI(heightInCm, weightInKg) {
+    let heightInMeters = heightInCm / 100;
+    let bmi = weightInKg / (heightInMeters * heightInMeters);
+    return bmi.toFixed(2);
+  }
 
   return (
     <div className={styles.main}>
@@ -113,7 +134,7 @@ export default function Page({ params }) {
                 color: "Black",
               }}
             >
-              Height : 156 (in className)
+              Height : {healthprofile.height} (in cms)
             </p>
             <p
               style={{
@@ -121,7 +142,7 @@ export default function Page({ params }) {
                 color: "Black",
               }}
             >
-              Weight : 56 (in kg)
+              Weight : {healthprofile.weight} (in kg)
             </p>
             <p
               style={{
@@ -129,9 +150,9 @@ export default function Page({ params }) {
                 color: "Black",
               }}
             >
-              BMI : 18 (fit)
+              BMI : {calculateBMI(healthprofile.height, healthprofile.weight)}
             </p>
-            <p
+            {/* <p
               style={{
                 fontSize: "14px",
                 color: "Black",
@@ -146,7 +167,7 @@ export default function Page({ params }) {
               }}
             >
               Heart Rate : 72
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
