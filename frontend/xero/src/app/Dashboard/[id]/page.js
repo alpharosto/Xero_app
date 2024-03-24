@@ -1,9 +1,54 @@
 "use client";
-import React from "react";
-import styles from "./index.module.css";
 import Image from "next/image";
+import styles from "./index.module.css";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Doctordashboard = () => {
+export default function Page({ params }) {
+  const patientId = params.id;
+
+  const [data, setData] = useState([]);
+  const [healthprofile, setHealthprofile] = useState([]);
+
+  const profiledata = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/patient/" + patientId
+      );
+      setData(response.data.patient);
+      console.log("healthproffile2", response.data.patient.healthprofile2[0]);
+      setHealthprofile(response.data.patient.healthprofile2[0]);
+      console.log("responces", response);
+      6;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    profiledata();
+  }, []);
+
+  console.log("patient-====", data);
+
+  const sos = async () => {
+    try {
+      const response = await axios.post(
+        "https://4687-115-247-30-146.ngrok-free.app/api/send_message",
+        {
+          to_numbers: ["+919352894822", "+917709551702"],
+          message_body: "Emergency!",
+        }
+      );
+
+      console.log("responce", response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.above}>
@@ -21,7 +66,7 @@ const Doctordashboard = () => {
               color: "white",
             }}
           >
-            Hi , Gaurav
+            Hi , {data?.firstName} !
           </p>
           <p
             style={{
@@ -115,7 +160,15 @@ const Doctordashboard = () => {
         >
           <div className={styles.button_1}>Update Medical History</div>
           <div>
-            <Image src="/sos.png" alt="doctor" width={100} height={60} />
+            <Image
+              src="/sos.png"
+              alt="doctor"
+              width={100}
+              height={60}
+              onClick={() => {
+                sos();
+              }}
+            />
           </div>
         </div>
       </div>
@@ -146,17 +199,19 @@ const Doctordashboard = () => {
           paddingTop: "10px",
         }}
       >
-        <div>
-          <Image src="/content.png" alt="doctor" width={40} height={40} />
-          <p
-            style={{
-              fontSize: "12px",
-              color: "black",
-            }}
-          >
-            Home
-          </p>
-        </div>
+        <Link href={"/Dashboard/" + patientId}>
+          <div>
+            <Image src="/content.png" alt="doctor" width={40} height={40} />
+            <p
+              style={{
+                fontSize: "12px",
+                color: "black",
+              }}
+            >
+              Home
+            </p>
+          </div>
+        </Link>
         <div>
           <Image
             src="/icon_portfolio.png"
@@ -173,7 +228,7 @@ const Doctordashboard = () => {
             chatbot
           </p>
         </div>
-        <div>
+        <Link href={"/Profile/" + patientId}>
           <Image
             src="/icon_portfolio.png"
             alt="doctor"
@@ -188,9 +243,8 @@ const Doctordashboard = () => {
           >
             Profile
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );
-};
-export default Doctordashboard;
+}

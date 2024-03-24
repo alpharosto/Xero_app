@@ -106,6 +106,8 @@ export default function Page({ params }) {
           anycurrentmedications: "no",
         }
       );
+      console.log("responce", responce);
+      router.push("/Dashboard/" + patientId);
     } catch (error) {
       console.log(error);
     }
