@@ -106,7 +106,7 @@ const Question = () => {
       </div>
       <div className={styles.block}>
         <First>
-          Have you been diagnosed with any serious medical conditions for which you are undergoing treatment? If yes, please specify
+          Have you been diagnosed with any medical conditions for which you are undergoing treatment? If yes, please specify
         </First>
         <Input
           type="text"
