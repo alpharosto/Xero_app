@@ -1,6 +1,9 @@
 "use client";
-import styled from 'styled-components';
-import { useState } from 'react';
+import styled from "styled-components";
+import { useState } from "react";
+import axios from "axios";
+import styles from "./index.module.css";
+import { useRouter } from "next/navigation";
 
 const Main = styled.main`
   margin-left: auto;
@@ -76,16 +79,6 @@ const Icon = styled.i`
   font-size: 15px !important;
 `;
 
-const Button = styled.button`
-  border: none;
-  padding: 10px;
-  border-radius: 25px;
-  cursor: pointer;
-  width: 100%;
-  color: white;
-  background-color:#005cb9
-`;
-
 const ExistingAccount = styled.div`
   color: black; /* Set text color to black */
   a {
@@ -96,9 +89,37 @@ const ExistingAccount = styled.div`
 `;
 
 export default function Signup() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const router = useRouter();
+
+  console.log("User-Name==", username);
+  console.log("email==", email);
+  console.log("password==", password);
+
+  const signup = async () => {
+    console.log("name==", username);
+    console.log("email==", email);
+    console.log("password==", password);
+    console.log("confirmPassword==", confirmPassword);
+
+    try {
+      const response = await axios.post("http://localhost:5000/user/signup", {
+        name: username,
+        email: email,
+        password: password,
+        // confirmPassword: confirmPassword,
+        role: "Patient",
+      });
+      router.push("/Login");
+      console.log("response==", response);
+    } catch (error) {
+      console.log("error==", error);
+    }
+  };
 
   return (
     <Main>
@@ -107,61 +128,69 @@ export default function Signup() {
       </header>
       <Form>
         <InputWrapper>
-          <Input 
-            id="input" 
-            type="text" 
-            required 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
+          <Input
+            id="input"
+            type="text"
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Label htmlFor="input">Username</Label>
-          <Icon className="material-icons">person</Icon>
+          {/* <Icon className="material-icons">person</Icon> */}
         </InputWrapper>
         <InputWrapper>
-          <Input 
-            id="email" 
-            type="email" 
-            required 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+          <Input
+            id="email"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Label htmlFor="email">Email</Label>
-          <Icon className="material-icons">email</Icon>
+          {/* <Icon className="material-icons">email</Icon> */}
         </InputWrapper>
         <InputWrapper>
-          <Input 
-            id="password" 
-            type="password" 
-            required 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+          <Input
+            id="password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Label htmlFor="password">Password</Label>
-          <Icon className="material-icons">lock</Icon>
+          {/* <Icon className="material-icons">lock</Icon> */}
         </InputWrapper>
         <InputWrapper>
-          <Input 
-            id="password" 
-            type="password" 
-            required 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+          <Input
+            id="password"
+            type="password"
+            required
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <Label htmlFor="password">ConfirmPassword</Label>
-          <Icon className="material-icons">lock</Icon>
+          {/* <Icon className="material-icons">lock</Icon> */}
         </InputWrapper>
-        <InputWrapper>
-          <Input 
-            id="password" 
-            type="password" 
-            required 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+        {/* <InputWrapper>
+          <Input
+            id="password"
+            type="password"
+            required
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <Label htmlFor="password">AdharNo.</Label>
           <Icon className="material-icons">Number</Icon>
-        </InputWrapper>
-        <Button>Sign Up</Button>
+        </InputWrapper> */}
+        <div
+          onClick={() => {
+            signup();
+          }}
+          className={styles.button}
+        >
+          Sign Up
+        </div>
+
         <ExistingAccount>
           Already have an account? <a href="Login">Log in</a>
         </ExistingAccount>
