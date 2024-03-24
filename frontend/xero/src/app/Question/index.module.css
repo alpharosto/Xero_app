@@ -1,0 +1,120 @@
+.main{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+    width: 400px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: transparent;
+    backdrop-filter: blur(25px);
+    position: relative;
+  }
+  
+  .above{
+    display: flex;
+    flex-direction: column;
+    stroke-width: 1px;
+    stroke: #000;
+    overflow: hidden;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    display: flex;
+    min-height: 79px;
+    width: 100%;
+    align-items: start;
+    font-size: 18px;
+    color: var(--Negro-general, #252525);
+    font-weight: 700;
+    max-width: 476px;
+    padding: 13px 80px 34px 22px;
+  }
+  
+  
+  .Health{
+    position: relative;
+   color: white;
+    margin-top: 8px;
+    width: 176px;
+    height: 6px;
+  }
+  .first{
+    margin-top: 15px;
+    font-family: Inter, sans-serif;
+  }
+  
+  .input {
+    font-family: Inter, sans-serif;
+    text-decoration-line: underline;
+    border-radius: 10px;
+    border-color: rgba(165, 165, 165, 1);
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 10px;
+    width: 350px;
+    align-items: start;
+    justify-content: center;
+    padding: 10px 10px;
+  }
+  
+  .continue {
+    font-family: Inter, sans-serif;
+    text-decoration-line: underline;
+    border-radius: 40px;
+    background-color: #005cb9;
+    margin-top: 61px;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 16px 60px;
+  }
+  .text {
+    font-size: 16px;
+    color: black;
+    font-weight: normal;
+  }
+  
+    
+.Div {
+    display: flex;
+    flex-direction: column;
+    stroke-width: 1px;
+    stroke: #000;
+    overflow: hidden;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    display: flex;
+    min-height: 79px;
+    width: 100%;
+    align-items: start;
+    font-size: 18px;
+    color: #000;
+    font-weight: 700;
+    padding: 11px 80px 34px 22px;
+    }
+    
+    
+    
+    .Div2{
+    position: relative;
+    font-family: Inter, sans-serif;
+    text-decoration-line: underline;
+    font-weight: 700;
+    font-size: 25px;
+    }
+    
+    .Div3{
+    position: relative;
+    background-color: #00b3ff;
+    margin-top: 9px;
+    width: 178px;
+    height: 6px;
+    }
+
+    

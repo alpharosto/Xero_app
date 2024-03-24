@@ -1,0 +1,150 @@
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    width: 400px;
+    padding: 20px;
+    border-radius: 0px;
+    border: 2px solid black; /* Set border color to black */
+    background-color: white; /* Set background color to white */
+    backdrop-filter: blur(25px);
+    position: relative;
+  }
+  
+  .content {
+    align-items: center;
+    justify-content: center;
+    color: black; /* Set text color to black */
+  }
+  
+  .line {
+    width: 80%; /* Adjust the width of the line */
+    height: 2px; /* Adjust the thickness of the line */
+    background-color: black; /* Color of the line */
+    margin: 20px auto; /* Center the line horizontally and add some space */
+  }
+  
+  .Address {
+    color: black; /* Set text color to black */
+    font-weight: 600;
+    font-size: 0.7rem;
+  }
+  
+  .input {
+    font-family: Inter, sans-serif;
+    text-decoration-line: none;
+    border-radius: 10px;
+    border: 1px solid black; /* Set border color to black */
+    margin-top: 10px;
+    background-color: #DCDCDC ;
+    width: 350px;
+    align-items: start;
+    justify-content: center;
+    padding: 10px 10px;
+    color: #000;
+  }
+  
+  .continue {
+    font-family: Inter, sans-serif;
+    text-decoration-line: none;
+    border-radius: 40px;
+    background-color: #005cb9;
+    margin-top: 61px;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+    justify-content: center;
+    padding: 16px 60px;
+  }
+  .Health{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    stroke-width: 1px;
+    stroke: #000;
+    overflow: hidden;
+    /* border-color: rgba(0, 0, 0, 1); */
+    /* border-style: solid; */
+    border-width: 1px;
+    position: relative;
+    display: flex;
+    min-height: 79px;
+    width: 100%;
+    align-items: start;
+    font-size: 18px;
+    background-color: aqua;
+    color: black; /* Set text color to black */
+    font-weight: 700;
+    max-width: 476px;
+    padding: 13px 80px 34px 22px;
+  
+  }
+  
+  .Above {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    stroke-width: 1px;
+    stroke: #000;
+    overflow: hidden;
+    /* border-color: rgba(0, 0, 0, 1); */
+    /* border-style: solid; */
+    border-width: 1px;
+    position: relative;
+    display: flex;
+    min-height: 79px;
+    width: 100%;
+    align-items: start;
+    font-size: 18px;
+    background-color: aqua;
+    color: black; /* Set text color to black */
+    font-weight: 700;
+    max-width: 476px;
+    padding: 13px 80px 34px 22px;
+   }
+
+   
+.Div {
+display: flex;
+flex-direction: column;
+stroke-width: 1px;
+stroke: #000;
+overflow: hidden;
+border-color: rgba(0, 0, 0, 1);
+border-style: solid;
+border-width: 1px;
+position: relative;
+display: flex;
+min-height: 79px;
+width: 100%;
+align-items: start;
+font-size: 18px;
+color: #000;
+font-weight: 700;
+padding: 11px 80px 34px 22px;
+}
+
+
+.Div2{
+  position: relative;
+  font-family: Inter, sans-serif;
+  text-decoration-line: underline;
+  font-weight: 700;
+  font-size: 25px;
+  }
+
+.Div3{
+position: relative;
+background-color: #00b3ff;
+margin-top: 9px;
+width: 178px;
+height: 6px;
+}
+
+.interest{
+    color: #005cb9;
+    text-align: center;
+    align-self: center;
+    font: 15px Inter, sans-serif;
+}
