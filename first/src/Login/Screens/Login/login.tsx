@@ -1,10 +1,18 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import {useState} from 'react';
 import axios from 'axios'; // Import axios if you need it
 
-function Login(): React.JSX.Element {
+function Login({navigation}): React.JSX.Element {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -31,16 +39,20 @@ function Login(): React.JSX.Element {
         style={styles.input}
         placeholder="E-mail"
         value={username}
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={text => setUsername(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry={true}
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={text => setPassword(text)}
       />
-      <TouchableOpacity style={styles.button} onPress={login}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('HealthProfile');
+        }}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <Text style={styles.signupText}>
