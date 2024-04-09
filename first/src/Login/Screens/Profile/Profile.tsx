@@ -1,12 +1,41 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect , useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-function Profile() {
+export default function Profile({ route, navigation  }) {
+  const { feedData } = route.params || {};
+  console.log("feeddata==",feedData);
+
+  const [data, setData] = useState({});
+  const [healthprofile, setHealthprofile] = useState({});
+
+  useEffect(() => {
+    profiledata();
+  }, []);
+
+  const profiledata = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:5000/patient/' + id
+      );
+      setData(response.data.patient);
+      setHealthprofile(response.data.patient.healthprofile2[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+
         <Text style={styles.headerText}>Patient Profile</Text>
         <View style={styles.headerLine} />
       </View>
@@ -16,51 +45,48 @@ function Profile() {
           style={styles.profileImage}
           resizeMode="contain"
         />
-        <View style={styles.textInfo}>
-          <Text style={styles.name}>Gaurav</Text>
-          <Text style={styles.phone}>91 1233456789</Text>
+     <View style={styles.container}>
+          <Text style={styles.name}>text</Text>
+          <Text style={styles.number}>text</Text>
         </View>
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Personal Information</Text>
-        <View style={styles.info}>
-          <Text>Gender: Male</Text>
-          <Text>Aadhar No: 92345 23456</Text>
-          <Text>Address: Mali Nagar, Chakur</Text>
-        </View>
+        <Text style={styles.subtitle}>Personal:</Text>
+        <Text style={styles.infoText}>{`Gender: Male text `}</Text>
+        <Text style={styles.infoText}>{`Adharno:`}</Text>
+        <Text style={styles.infoText}>{`Address: `}</Text>
       </View>
       <View style={styles.blackLine}></View>
-      <View style={styles.comp1}>
-        <Text style={styles.title}>Physical :</Text>
-        <View style={styles.info}>
-          <Text>Age : 20</Text>
-          <Text>Weight :40 kg</Text>
-          <Text>Height : 150 cm</Text>
-          <Text>Disability : no</Text>
-          <Text>Bloodgroup : o+</Text>
-        </View>
+      {/* <View style={styles.comp1}> */}
+        {/* <Text style={styles.title}>Physical :</Text> */}
+        <View style={styles.section}>
+        <Text style={styles.subtitle}>Physical:</Text>
+        <Text style={styles.infoText}>{`Age: `}</Text>
+        <Text style={styles.infoText}>{`Weight:  kg`}</Text>
+        <Text style={styles.infoText}>{`Height:  cm`}</Text>
+        <Text style={styles.infoText}>{`Disability: `}</Text>
+        <Text style={styles.infoText}>{`Bloodgroup: `}</Text>
+      {/* </View> */}
       </View>
-      <View style={styles.blackLine}></View>
-      <View style={styles.comp1}>
-        <Text style={styles.title}>Emergency Contact details:</Text>
-        <View style={styles.info}>
-          <Text>mom : 91 321456987</Text>
-          <Text>dad: 91 3214569874</Text>
-        </View>
+      <View style={styles.blackLine} />
+      <View style={styles.section}>
+        <Text style={styles.subtitle}>Emergency Contact details:</Text>
+        <Text style={styles.infoText}>1448852</Text>
+        <Text style={styles.infoText}>1145453222</Text>
       </View>
-      <View style={styles.blackLine}></View>
-      <View style={styles.comp1}>
-        <Text style={styles.title}>Medical history :</Text>
-        <View style={styles.info}>
-          <Text>Disease : no</Text>
-          <Text>Allergy :no</Text>
-          <Text>CurrentMedicine :no</Text>
-          <Text>Undergoing treatment :no</Text>
-        </View>
+      <View style={styles.blackLine} />
+      <View style={styles.section}>
+        <Text style={styles.subtitle}>Medical history:</Text>
+        <Text style={styles.infoText}>Disease: </Text>
+        <Text style={styles.infoText}>Allergy: </Text>
+        <Text style={styles.infoText}>Current edicine: </Text>
+        <Text style={styles.infoText}>Undergoing Treatment</Text>
       </View>
-    
     </View>
+    
+
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -75,6 +101,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#00BFFF',
     marginBottom: 10,
   },
   headerLine: {
@@ -132,6 +159,18 @@ const styles = StyleSheet.create({
   //   marginLeft: 10,
   // },
 
+  subtitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#4dd6e6',
+  },
+  infoText: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  number : {
+    fontSize : 14
+  }
+
 });
 
-export default Profile;

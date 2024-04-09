@@ -5,11 +5,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function Page({ params }) {
-  const Id = params.Id;
-  console.log("Id==", Id);
 
-  const router = useRouter();
+export default function Page({ params }) {
+  const { Id } = route.params;
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -48,17 +46,15 @@ export default function Page({ params }) {
             emergencyContactPerson: emergencyContactPerson,
             age: age,
             bloodGroup: bloodGroup,
-          }
-        );
-        console.log("response==", response);
-        router.push("/Question/" + patientId);
+          });
+          navigation.navigate('Question', { patientId: patientId });
+        } catch (error) {
+          console.log('error==', error);
+        }
       } catch (error) {
-        console.log("error==", error);
+        console.log('error==', error);
       }
-    } catch (error) {
-      console.log("error==", error);
-    }
-  };
+    };''
 
   return (
     <main>

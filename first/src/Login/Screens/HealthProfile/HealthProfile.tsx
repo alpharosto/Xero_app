@@ -1,19 +1,84 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
+import axios from 'axios';
+import React, { useState } from 'react';
+// import {useState} from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet , ScrollView } from 'react-native';
 
-const HealthProfileSetup = () => {
+const HealthProfile = ({navigation , route}) => {
+ 
+  const { id} = route.params;
+  console.log("id == " , id );
+
+
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [dob, setDob] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [disability, setDisability] = useState('');
+  const [familyMedicalHistory, setFamilyMedicalHistory] = useState('');
+  const [emergencyContactPerson, setEmergencyContactPerson] = useState('');
+  const [age, setAge] = useState('');
+  const [bloodGroup, setBloodGroup] = useState('');
+
+  const HealthProfile = async () => {
+    try {
+       const response = await axios.post('http://localhost:5000/patient/add', {
+        firstName: firstName,
+        lastName: lastName,
+        // userId: Id,
+        mobileNumber: mobileNumber,
+      });
+
+      
+      console.log('response', response);
+      const patientId = response.data.patient._id;
+
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/patient/addhealthprofile/${patientId}`,
+          {
+            address: address,
+            dob: dob,
+            height: height,
+            weight: weight,
+            anydisabilities: disability,
+            anymedicalhistory: familyMedicalHistory,
+            emergencyContactPerson: emergencyContactPerson,
+            age: age,
+            bloodGroup: bloodGroup,
+          });
+          navigation.navigate('Question', { patientId: patientId });
+        } catch (error) {
+          console.log('error==', error);
+        }
+      } catch (error) {
+        console.log('error==', error);
+      }
+    };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        {/* <View style={styles.div}> */}
-          {/* <View style={styles.div2}> */}
+    <ScrollView style={styles.container}>
+      <View style={styles.main}
+      >
+        {/* <View style={styles.div}>
+          { <View style={styles.div2}> 
             <Text style={styles.divText}>Health Profile Setup</Text>
             <View style={styles.div3} />
-          {/* </View> */}
-        {/* </View> */}
+          </View> }
+        </View> */}
         <Text style={styles.interest}>
-          We're interested in learning more about you. Please provide the following details.
+          We're interested .in learning more about you. Please provide the following details.
         </Text>
         {/* <View style={styles.line} /> */}
         <View style={styles.line} />
@@ -61,17 +126,21 @@ const HealthProfileSetup = () => {
           />
         </View>
         <View>
-          <Text style={styles.address}>Emergency contact person</Text>
+          <Text style={styles.address}>Emergency Number </Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your number here"
+            placeholder="Enter your input here"
           />
         </View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Continue</Text>
+        <TouchableOpacity style={styles.button} 
+        onPress={() => {
+            navigation.navigate('Question');
+          }}>
+          <Text style={styles.buttonText}
+           >Continue</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -102,6 +171,7 @@ const styles = StyleSheet.create({
   },
   interest: {
     marginBottom: 20,
+    color: '#00BFFF',
   },
   line: {
     height: 1,
@@ -110,6 +180,7 @@ const styles = StyleSheet.create({
   },
   address: {
     fontWeight: 'bold',
+    color:"black",
     marginBottom: 5,
   },
   input: {
@@ -119,11 +190,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  button: {
-    backgroundColor: 'blue',
-    paddingVertical: 10,
-    borderRadius: 5,
-    alignItems: 'center',
+    button: {
+      backgroundColor: '#005cb9',
+      padding: 15,
+      borderRadius: 25,
+      width: '100%',
+      alignItems: 'center',
+      marginTop: 10,
   },
   buttonText: {
     color: 'white',
@@ -131,4 +204,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HealthProfileSetup;
+
+export default HealthProfile;
+

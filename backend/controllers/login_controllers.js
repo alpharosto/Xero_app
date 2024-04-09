@@ -95,6 +95,7 @@ const login_post = async (req, res) => {
       res.status(400).json({ message: "Username or Password incorrect" });
     }
   } else {
+    console.log("error")
     res.status(400).json({ message: "Username or Password incorrect" });
   }
 };

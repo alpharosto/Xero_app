@@ -26,7 +26,7 @@ const patientSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    required: [true, "Please enter a last name"],
+    required: [false, "Please enter a last name"],
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

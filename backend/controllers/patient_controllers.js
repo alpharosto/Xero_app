@@ -22,7 +22,8 @@ const getPatientById = async (req, res, next) => {
     patient = await Patient.findById(patientId);
   } catch (err) {
     return next(
-      new HttpError("Fetching user failed, please try again later.", 500)
+      // new HttpError("Fetching user failed, please try again later.", 500)
+       res.status(500).json("Fetching user failed, please try again later.")
     );
   }
   if (!patient) {

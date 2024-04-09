@@ -12,7 +12,7 @@ import {
 import {useState} from 'react';
 import axios from 'axios'; // Import axios if you need it
 
-function Login({navigation}): React.JSX.Element {
+function Login({ navigation }): React.JSX.Element {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,14 +20,19 @@ function Login({navigation}): React.JSX.Element {
     console.log('name==', username);
     console.log('password==', password);
     try {
-      const response = await axios.post('http://localhost:5000/user/login', {
+      const response = await axios.post('http://54.227.167.241:5000/user/login', {
         email: username,
         password: password,
       });
-      const id = response.data.user._id;
-      // Navigate to another screen or do something with the response
-      console.log('response==', id);
-    } catch (error) {
+      // const id = response.data.user._id;
+      console.log('response==', response.data);
+      const data = response.data.user;
+      console.log("data" , data);
+      console.log("data==", data._id);
+      navigation.navigate('Tab',{
+        id : data,
+      });
+    } catch (error : any) {
       console.log('error==', error);
     }
   };
@@ -48,14 +53,25 @@ function Login({navigation}): React.JSX.Element {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => {
           navigation.navigate('HealthProfile');
         }}>
         <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity> */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          login();
+          // navigation.navigate('Question');
+        }}>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.signupText}>
+      <Text style={styles.signupText}
+      onPress={() => {
+        navigation.navigate('SignUp');
+      }}>
         Don't have an account? <Text style={styles.link}>Sign up</Text>
       </Text>
     </View>

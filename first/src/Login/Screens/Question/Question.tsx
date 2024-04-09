@@ -1,48 +1,50 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prettier/prettier */
+import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet , ScrollView } from 'react-native';
 // import axios from 'axios'; // Assuming you have Axios installed
 // import { useRouter } from 'next/navigation'; // Not available in React Native
 
 
 
-function Question({  }) {
+function Question({ route, navigation }) {
+  // const { id: patientId } = route.params;
   const [chronic, setChronic] = useState('');
   const [serious, setSerious] = useState('');
   const [symptoms, setSymptoms] = useState('');
   const [medications, setMedications] = useState('');
 
-  // const patientId = params.id;
-  // console.log(patientId);
-
-  // const router = useRouter(); // Not available in React Native
-
-  // const question = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       'http://localhost:5000/patient/addhealthprofile2/' + patientId,
-  //       {
-  //         anychronicdiseases: chronic,
-  //         anyallergies: serious,
-  //         anyundergoingtreatment: symptoms,
-  //         anycurrentmedications: medications,
-  //       }
-  //     );
-  //     console.log('response', response);
-  //     // router.push('/Dashboard/' + patientId); // Not available in React Native
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const question = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/patient/addhealthprofile2/${patientId}`,
+        {
+          anychronicdiseases: chronic,
+          anyallergies: serious,
+          anyundergoingtreatment: symptoms,
+          anycurrentmedications: medications,
+        }
+      );
+      console.log('response', response);
+      navigation.navigate('Dashboard', { id: patientId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <View style={styles.main}>
+    <ScrollView style={styles.main}>
+      <View style={styles.container}>
       <Text style={styles.title}>Health Profile Setup: {}</Text>
       <View style={styles.block}>
         <Text style={styles.label}>Do you have any chronic medical conditions? If yes, please specify</Text>
         <TextInput
           style={styles.input}
           multiline
+          numberOfLines={3}
           placeholder="Enter your input"
           value={chronic}
           onChangeText={setChronic}
@@ -53,6 +55,7 @@ function Question({  }) {
         <TextInput
           style={styles.input}
           multiline
+          numberOfLines={3}
           placeholder="Enter your input"
           value={serious}
           onChangeText={setSerious}
@@ -63,6 +66,7 @@ function Question({  }) {
         <TextInput
           style={styles.input}
           multiline
+          numberOfLines={3}
           placeholder="Enter your input"
           value={symptoms}
           onChangeText={setSymptoms}
@@ -73,15 +77,22 @@ function Question({  }) {
         <TextInput
           style={styles.input}
           multiline
+          numberOfLines={3}
           placeholder="Enter your input"
           value={medications}
           onChangeText={setMedications}
         />
       </View>
-      <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText}>Continue</Text>
+      <TouchableOpacity style={styles.button}  
+       onPress={() => {
+          navigation.navigate('Tab');
+        }}
+        >
+        <Text style={styles.buttonText}
+        >Continue</Text>
       </TouchableOpacity>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -91,8 +102,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     width: '90%',
   },
+  container: {
+    margin: 20,
+  },
   title: {
     fontSize: 20,
+    color: '#00BFFF',
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -101,14 +116,17 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    marginBottom: 10,
+    color:"black",
+    // marginBottom: 10,
   },
   input: {
+    // numberOfLines="2",
     borderWidth: 1,
     borderColor: '#dcdcdc',
     borderRadius: 10,
     padding: 10,
-    height: 100,
+    
+    // height: 100,
   },
   button: {
     backgroundColor: '#005cb9',

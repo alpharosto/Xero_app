@@ -1,9 +1,15 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable keyword-spacing */
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 
-export default function Signup() {
+function SignUp({ navigation }): React.JSX.Element {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +22,7 @@ export default function Signup() {
     console.log("confirmPassword==", confirmPassword);
 
     try {
-      const response = await axios.post("http://localhost:5000/user/signup", {
+      const response = await axios.post("http://54.227.167.241:5000/user/signup", {
         name: username,
         email: email,
         password: password,
@@ -24,6 +30,12 @@ export default function Signup() {
       });
       // Navigate to login screen after successful signup
       console.log("response==", response);
+      if(response.data.message === "Account Created Successfully"){
+                navigation.navigate("Login");
+      }
+      else{
+        console.warn("not signup");
+      }
     } catch (error) {
       console.log("error==", error);
     }
@@ -67,10 +79,16 @@ export default function Signup() {
             onChangeText={(text) => setConfirmPassword(text)}
           />
         </View>
-        <TouchableOpacity onPress={signup} style={styles.button}>
+        <TouchableOpacity style={styles.button}
+           onPress={() => {
+            signup();
+          }}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
-        <Text style={styles.existingAccount}>
+        <Text style={styles.existingAccount}
+         onPress={() => {
+          navigation.navigate('Login');
+        }}>
           Already have an account? <Text style={styles.loginLink}>Log in</Text>
         </Text>
       </View>
@@ -122,3 +140,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default SignUp;
