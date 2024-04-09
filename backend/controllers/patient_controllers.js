@@ -37,18 +37,23 @@ const getPatientById = async (req, res, next) => {
 // add patient
 const addPatient = async (req, res, next) => {
   const { firstName, lastName, userId, mobileNumber } = req.body;
-  const createdPatient = new Patient({
-    firstName,
-    lastName,
+  console.log(firstName);
+  console.log(userId);
+  console.log(mobileNumber);
+  try {
+    console.log("create");
+    const user = await Patient.create({
+     firstName,
     userId,
     mobileNumber,
-  });
-  try {
-    await createdPatient.save();
+    });
+    await user.save();
+    res.status(201).json({ patient: user });
   } catch (err) {
-    return next(new HttpError("Creating user failed, please try again.", 500));
+    // return next(new HttpError("Creating user failed, please try again.", 500));
+    return res.status(500).json("Creating user failed, please try again.")
   }
-  res.status(201).json({ patient: createdPatient });
+  // res.status(201).json({ patient: createdPatient });
 };
 
 // add healthprofile
@@ -70,6 +75,8 @@ const addHealthProfile = async (req, res, next) => {
       new HttpError("Fetching user failed, please try again later.", 500)
     );
   }
+
+  console.log("patient", patient)
   patient.healthprofile = {
     age,
     height,

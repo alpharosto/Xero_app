@@ -33,20 +33,16 @@ const HealthProfile = ({navigation , route}) => {
 
   const HealthProfile = async () => {
     try {
-       const response = await axios.post('http://localhost:5000/patient/add', {
-        firstName: firstName,
-        lastName: lastName,
-        // userId: Id,
-        mobileNumber: mobileNumber,
+       const response = await axios.post('http://54.227.167.241:5000/patient/add', {
+        firstName: id.name,
+        userId: id._id,
+        mobileNumber: 787878788878,
       });
-
-      
       console.log('response', response);
       const patientId = response.data.patient._id;
-
       try {
         const response = await axios.post(
-          `http://localhost:5000/patient/addhealthprofile/${patientId}`,
+          `http://54.227.167.241:5000/patient/addhealthprofile/${patientId}`,
           {
             address: address,
             dob: dob,
@@ -58,7 +54,9 @@ const HealthProfile = ({navigation , route}) => {
             age: age,
             bloodGroup: bloodGroup,
           });
-          navigation.navigate('Question', { patientId: patientId });
+
+          console.log("response--=-=",response);
+         // navigation.navigate('Question', { patientId: patientId });
         } catch (error) {
           console.log('error==', error);
         }
@@ -88,6 +86,10 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your address"
+            value={address}
+            onChange={(e : any) => {
+              setAddress(e);
+            }}
           />
         </View>
         <View>
@@ -95,6 +97,10 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="DD/MM/YY"
+            value={dob}
+            onChange={(e : any) => {
+              setDob(e);
+            }}
           />
         </View>
         <View>
@@ -102,6 +108,10 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your input here"
+            value={height}
+            onChange={(e : any) => {
+              setHeight(e);
+            }}
           />
         </View>
         <View>
@@ -109,6 +119,32 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your input here"
+            value={weight}
+            onChange={(e : any) => {
+              setWeight(e);
+            }}
+          />
+        </View>
+        <View>
+          <Text style={styles.address}>Age</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Age"
+            value={age}
+            onChange={(e : any) => {
+              setAge(e);
+            }}
+          />
+        </View>
+        <View>
+          <Text style={styles.address}>Blood Group</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your Blood Group"
+            value={bloodGroup}
+            onChange={(e : any) => {
+              setBloodGroup(e);
+            }}
           />
         </View>
         <View>
@@ -116,6 +152,10 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your input here"
+            value={disability}
+            onChange={(e : any) => {
+              setDisability(e);
+            }}
           />
         </View>
         <View>
@@ -123,6 +163,10 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your input here"
+            value={familyMedicalHistory}
+            onChange={(e : any) => {
+              setFamilyMedicalHistory(e);
+            }}
           />
         </View>
         <View>
@@ -130,11 +174,16 @@ const HealthProfile = ({navigation , route}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your input here"
+            value={emergencyContactPerson}
+            onChange={(e : any) => {
+              setEmergencyContactPerson(e);
+            }}
           />
         </View>
         <TouchableOpacity style={styles.button} 
         onPress={() => {
-            navigation.navigate('Question');
+            // navigation.navigate('Question');
+            HealthProfile();
           }}>
           <Text style={styles.buttonText}
            >Continue</Text>

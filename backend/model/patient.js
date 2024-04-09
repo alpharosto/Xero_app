@@ -39,7 +39,7 @@ const patientSchema = new mongoose.Schema({
   },
   mobileNumber: {
     type: String,
-    required: [true, "Please enter a mobile number"],
+    required: [false, "Please enter a mobile number"],
   },
   emergencycontact: {
     contact1: {
