@@ -1,3 +1,6 @@
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+/* eslint-disable keyword-spacing */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prettier/prettier */
@@ -31,39 +34,89 @@ const HealthProfile = ({navigation , route}) => {
   const [age, setAge] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
 
-  const HealthProfile = async () => {
-    try {
-       const response = await axios.post('http://54.227.167.241:5000/patient/add', {
+  // const HealthProfile = async () => {
+
+  //   console.log("first Api ==");
+  //   try {
+  //     console.log("first Api == enter");
+
+  //     console.log("id.name", id.name);
+  //     console.log("userId ==", id._id);
+  //     const response = await axios.post('http://54.227.167.241:5000/patient/add', {
+  //       firstName: id.name,
+  //       userId: id._id,
+  //       mobileNumber: 787878788878,
+  //     });
+  //     console.log('response === ', response);
+  //     const patientId = response.data.patient._id;
+  //     // try {
+  //     //   const response = await axios.post(
+  //     //     `http://54.227.167.241:5000/patient/addhealthprofile/${patientId}`,
+  //     //     {
+  //     //       address: address,
+  //     //       dob: dob,
+  //     //       height: height,
+  //     //       weight: weight,
+  //     //       anydisabilities: disability,
+  //     //       anymedicalhistory: familyMedicalHistory,
+  //     //       emergencyContactPerson: emergencyContactPerson,
+  //     //       age: age,
+  //     //       bloodGroup: bloodGroup,
+  //     //     });
+
+  //     //     console.log("response--=-=",response);
+  //     //    // navigation.navigate('Question', { patientId: patientId });
+  //     //   } catch (error) {
+  //     //     console.log('error==', error);
+  //     //   }
+  //     } catch (error) {
+  //       console.log('error==', error);
+  //     }
+  //   };
+
+  const healthprofileadd = async(p0: string) => {
+    try{
+
+      console.log("first Api == enter");
+      console.log("id.name", id.name);
+      console.log("userId ==", id._id);
+      //  const resp =  await axios.post("http://54.227.167.241:5000/patient/add" , {
+      //   firstName: id.name,
+      //   userId: id._id,
+      //   mobileNumber: 787878788878,
+      //  });
+      const resp =  await axios.post("https://c375-14-139-109-130.ngrok-free.app/patient/add" , {
         firstName: id.name,
         userId: id._id,
         mobileNumber: 787878788878,
-      });
-      console.log('response', response);
-      const patientId = response.data.patient._id;
-      try {
-        const response = await axios.post(
-          `http://54.227.167.241:5000/patient/addhealthprofile/${patientId}`,
-          {
-            address: address,
-            dob: dob,
-            height: height,
-            weight: weight,
-            anydisabilities: disability,
-            anymedicalhistory: familyMedicalHistory,
-            emergencyContactPerson: emergencyContactPerson,
-            age: age,
-            bloodGroup: bloodGroup,
-          });
-
-          console.log("response--=-=",response);
-         // navigation.navigate('Question', { patientId: patientId });
-        } catch (error) {
-          console.log('error==', error);
-        }
-      } catch (error) {
-        console.log('error==', error);
-      }
-    };
+       });
+       console.log("responce==", resp);
+       const patientId = resp.data.patient._id;
+           try {
+             const response = await axios.post(
+               `https://c375-14-139-109-130.ngrok-free.app/patient/addhealthprofile/${patientId}`,
+               {
+                 address: address,
+                 dob: dob,
+                 height: height,
+                 weight: weight,
+                 anydisabilities: disability,
+                 anymedicalhistory: familyMedicalHistory,
+                 emergencyContactPerson: emergencyContactPerson,
+                 age: age,
+                 bloodGroup: bloodGroup,
+               });
+     
+               console.log("response--=-=",response);
+              navigation.navigate('Question', { patientId: patientId , id : id });
+              }
+              catch(error){
+                console.log("error==",error);
+              }
+    }catch (e: any ) {
+      console.log("errror---", e)
+    }
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -87,7 +140,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your address"
             value={address}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setAddress(e);
             }}
           />
@@ -98,7 +151,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="DD/MM/YY"
             value={dob}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setDob(e);
             }}
           />
@@ -109,7 +162,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your input here"
             value={height}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setHeight(e);
             }}
           />
@@ -120,7 +173,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your input here"
             value={weight}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setWeight(e);
             }}
           />
@@ -131,7 +184,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your Age"
             value={age}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setAge(e);
             }}
           />
@@ -142,7 +195,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your Blood Group"
             value={bloodGroup}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setBloodGroup(e);
             }}
           />
@@ -153,7 +206,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your input here"
             value={disability}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setDisability(e);
             }}
           />
@@ -164,7 +217,7 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your input here"
             value={familyMedicalHistory}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setFamilyMedicalHistory(e);
             }}
           />
@@ -175,15 +228,14 @@ const HealthProfile = ({navigation , route}) => {
             style={styles.input}
             placeholder="Enter your input here"
             value={emergencyContactPerson}
-            onChange={(e : any) => {
+            onChangeText={(e : any) => {
               setEmergencyContactPerson(e);
             }}
           />
         </View>
         <TouchableOpacity style={styles.button} 
         onPress={() => {
-            // navigation.navigate('Question');
-            HealthProfile();
+          healthprofileadd("Question");
           }}>
           <Text style={styles.buttonText}
            >Continue</Text>

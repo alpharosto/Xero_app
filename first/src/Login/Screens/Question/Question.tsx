@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -11,7 +12,9 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet , ScrollView } from
 
 
 function Question({ route, navigation }) {
-  // const { id: patientId } = route.params;
+  const { patientId, id } = route.params;
+
+  console.log("patientId==", patientId)
   const [chronic, setChronic] = useState('');
   const [serious, setSerious] = useState('');
   const [symptoms, setSymptoms] = useState('');
@@ -20,7 +23,7 @@ function Question({ route, navigation }) {
   const question = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/patient/addhealthprofile2/${patientId}`,
+        `https://c375-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${patientId}`,
         {
           anychronicdiseases: chronic,
           anyallergies: serious,
@@ -29,7 +32,7 @@ function Question({ route, navigation }) {
         }
       );
       console.log('response', response);
-      navigation.navigate('Dashboard', { id: patientId });
+      navigation.navigate('Tab', { id : id });
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +88,7 @@ function Question({ route, navigation }) {
       </View>
       <TouchableOpacity style={styles.button}  
        onPress={() => {
-          navigation.navigate('Tab');
+        question();
         }}
         >
         <Text style={styles.buttonText}

@@ -10,26 +10,32 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 
 export default function Profile({ route, navigation  }) {
   const { feedData } = route.params || {};
-  console.log("feeddata==",feedData);
+  console.log("feeddata===",feedData);
 
-  const [data, setData] = useState({});
-  const [healthprofile, setHealthprofile] = useState({});
+  const [data, setData] = useState();
+  const [healthprofile, setHealthprofile] = useState();
 
-  useEffect(() => {
-    profiledata();
-  }, []);
 
   const profiledata = async () => {
     try {
+      const id  =  feedData._id;
       const response = await axios.get(
         'http://localhost:5000/patient/' + id
       );
+      console.log("respoce==", response);
       setData(response.data.patient);
       setHealthprofile(response.data.patient.healthprofile2[0]);
     } catch (err) {
       console.log(err);
     }
   };
+
+
+  useEffect(() => {
+    profiledata();
+  }, []);
+
+
 
   
   return (
@@ -46,13 +52,13 @@ export default function Profile({ route, navigation  }) {
           resizeMode="contain"
         />
      <View style={styles.container}>
-          <Text style={styles.name}>text</Text>
-          <Text style={styles.number}>text</Text>
+          <Text style={styles.name}>{data?.firstName}</Text>
+          <Text style={styles.number}> {data?.mobileNumber}</Text>
         </View>
       </View>
       <View style={styles.section}>
         <Text style={styles.subtitle}>Personal:</Text>
-        <Text style={styles.infoText}>{`Gender: Male text `}</Text>
+        <Text style={styles.infoText}>{`Gender: Male text `} {patientId}</Text>
         <Text style={styles.infoText}>{`Adharno:`}</Text>
         <Text style={styles.infoText}>{`Address: `}</Text>
       </View>
@@ -61,26 +67,31 @@ export default function Profile({ route, navigation  }) {
         {/* <Text style={styles.title}>Physical :</Text> */}
         <View style={styles.section}>
         <Text style={styles.subtitle}>Physical:</Text>
-        <Text style={styles.infoText}>{`Age: `}</Text>
-        <Text style={styles.infoText}>{`Weight:  kg`}</Text>
-        <Text style={styles.infoText}>{`Height:  cm`}</Text>
-        <Text style={styles.infoText}>{`Disability: `}</Text>
-        <Text style={styles.infoText}>{`Bloodgroup: `}</Text>
+        <Text style={styles.infoText}>{`Age: `}{data?.healthprofile?.age}</Text>
+        <Text style={styles.infoText}>{`Weight:  kg`} {data?.healthprofile?.weight} kg</Text>
+        <Text style={styles.infoText}>{`Height:  cm`} {data?.healthprofile?.height} cm</Text>
+        <Text style={styles.infoText}>{`Disability: `}{data?.healthprofile?.anydisabilities}</Text>
+        <Text style={styles.infoText}>{`Bloodgroup: `}  {data?.healthprofile?.bloodGroup}</Text>
       {/* </View> */}
       </View>
       <View style={styles.blackLine} />
       <View style={styles.section}>
         <Text style={styles.subtitle}>Emergency Contact details:</Text>
-        <Text style={styles.infoText}>1448852</Text>
-        <Text style={styles.infoText}>1145453222</Text>
+        <Text style={styles.infoText}>       {data?.emergencycontact?.contact1?.name}: 91{" "}
+          {data?.emergencycontact?.contact1?.number}
+          </Text>
+        <Text style={styles.infoText}>
+        {data?.emergencycontact?.contact2?.name}: 91{" "}
+          {data?.emergencycontact?.contact2?.number}
+        </Text>
       </View>
       <View style={styles.blackLine} />
       <View style={styles.section}>
-        <Text style={styles.subtitle}>Medical history:</Text>
-        <Text style={styles.infoText}>Disease: </Text>
-        <Text style={styles.infoText}>Allergy: </Text>
-        <Text style={styles.infoText}>Current edicine: </Text>
-        <Text style={styles.infoText}>Undergoing Treatment</Text>
+        <Text style={styles.subtitle}>Medical history: </Text>
+        <Text style={styles.infoText}>Disease:{healthprofile?.anychronicdiseases} </Text>
+        <Text style={styles.infoText}>Allergy: {healthprofile?.anyallergies} </Text>
+        <Text style={styles.infoText}>Current edicine:{healthprofile?.anyundergoingtreatment} </Text>
+        <Text style={styles.infoText}>Undergoing Treatment  {healthprofile?.anycurrentmedications}</Text>
       </View>
     </View>
     

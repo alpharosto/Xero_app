@@ -34,6 +34,26 @@ const getPatientById = async (req, res, next) => {
   res.json({ patient: patient.toObject({ getters: true }) });
 };
 
+// get patient by userId
+const getPatientbyuserId = async (req, res, next) => {
+  const patientId = req.params.pid;
+  let patient;
+  try {
+    patient = await Patient.find((item)=> {
+       item.userId == patientId
+    });
+  } catch (err) {
+    return res.status(500).json("Fetching user failed, please try again later.");
+  }
+  if (!patient) {
+    return next(
+      new HttpError("Could not find a user for the provided id.", 404)
+    );
+  }
+  res.json({ patient: patient.toObject({ getters: true }) });
+};
+
+
 // add patient
 const addPatient = async (req, res, next) => {
   const { firstName, lastName, userId, mobileNumber } = req.body;
@@ -166,3 +186,4 @@ exports.addPatient = addPatient;
 exports.addHealthProfile = addHealthProfile;
 exports.addEmergencyContact = addEmergencyContact;
 exports.addHealthProfile2 = addHealthProfile2;
+exports.getPatientbyuserId =getPatientbyuserId;

@@ -7,10 +7,13 @@ const {
   addHealthProfile,
   addEmergencyContact,
   addHealthProfile2,
+  getPatientbyuserId,
 } = require("../controllers/patient_controllers");
 
 router.get("/", getallPatient);
-router.get("/:pid", getPatientById);
+// router.get("/:pid", getPatientById);
+router.get("/:pid",getPatientbyuserId)
+
 router.post("/add", addPatient);
 router.post("/addhealthprofile/:pid", addHealthProfile);
 router.post("/addemergencycontact/:pid", addEmergencyContact);

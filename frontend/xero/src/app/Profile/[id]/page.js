@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Page({ params }) {
   const patientId = params.id;
-
+  
   const router = useRouter();
   const [data, setData] = useState([]);
   const [healthprofile, setHealthprofile] = useState([]);

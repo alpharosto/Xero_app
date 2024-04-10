@@ -23,6 +23,10 @@ function SignUp({ navigation }): React.JSX.Element {
 
     try {
       const response = await axios.post("http://54.227.167.241:5000/user/signup", {
+        // name: username,
+        // email: email,
+        // password: password,
+        // role: "Patient",
         name: username,
         email: email,
         password: password,
@@ -30,12 +34,7 @@ function SignUp({ navigation }): React.JSX.Element {
       });
       // Navigate to login screen after successful signup
       console.log("response==", response);
-      if(response.data.message === "Account Created Successfully"){
-                navigation.navigate("Login");
-      }
-      else{
-        console.warn("not signup");
-      }
+      navigation.navigate("Login");
     } catch (error) {
       console.log("error==", error);
     }

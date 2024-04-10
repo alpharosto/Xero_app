@@ -7,7 +7,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-`unused-vars */
 /* eslint-disable prettier/prettier */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
