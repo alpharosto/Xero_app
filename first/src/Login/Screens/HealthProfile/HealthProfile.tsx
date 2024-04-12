@@ -74,41 +74,31 @@ const HealthProfile = ({navigation , route}) => {
   //     }
   //   };
 
-  const healthprofileadd = async(p0: string) => {
+  const healthprofileadd = async() => {
     try{
 
       console.log("first Api == enter");
       console.log("id.name", id.name);
       console.log("userId ==", id._id);
-      //  const resp =  await axios.post("http://54.227.167.241:5000/patient/add" , {
-      //   firstName: id.name,
-      //   userId: id._id,
-      //   mobileNumber: 787878788878,
-      //  });
-      const resp =  await axios.post("https://c375-14-139-109-130.ngrok-free.app/patient/add" , {
-        firstName: id.name,
-        userId: id._id,
-        mobileNumber: 787878788878,
-       });
-       console.log("responce==", resp);
-       const patientId = resp.data.patient._id;
+      const healthprofile = {
+        dob: dob,
+        height: height,
+        weight: weight,
+        anydisabilities: disability,
+        anymedicalhistory: familyMedicalHistory,
+        emergencyContactPerson: emergencyContactPerson,
+        age: age,
+        bloodGroup: bloodGroup,
+       }
            try {
              const response = await axios.post(
-               `https://c375-14-139-109-130.ngrok-free.app/patient/addhealthprofile/${patientId}`,
+               `https://6017-14-139-109-130.ngrok-free.app/patient/addhealthprofile/${id.patient_id}`,
                {
-                 address: address,
-                 dob: dob,
-                 height: height,
-                 weight: weight,
-                 anydisabilities: disability,
-                 anymedicalhistory: familyMedicalHistory,
-                 emergencyContactPerson: emergencyContactPerson,
-                 age: age,
-                 bloodGroup: bloodGroup,
+                healthprofile : healthprofile,
                });
      
                console.log("response--=-=",response);
-              navigation.navigate('Question', { patientId: patientId , id : id });
+              navigation.navigate('Question', { patientId: id , id : id });
               }
               catch(error){
                 console.log("error==",error);
@@ -116,7 +106,7 @@ const HealthProfile = ({navigation , route}) => {
     }catch (e: any ) {
       console.log("errror---", e)
     }
-  }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -235,7 +225,7 @@ const HealthProfile = ({navigation , route}) => {
         </View>
         <TouchableOpacity style={styles.button} 
         onPress={() => {
-          healthprofileadd("Question");
+          healthprofileadd();
           }}>
           <Text style={styles.buttonText}
            >Continue</Text>

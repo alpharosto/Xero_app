@@ -14,7 +14,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet , ScrollView } from
 function Question({ route, navigation }) {
   const { patientId, id } = route.params;
 
-  console.log("patientId==", patientId)
+  console.log("patientId==", patientId);
+  console.log("id:", id);
   const [chronic, setChronic] = useState('');
   const [serious, setSerious] = useState('');
   const [symptoms, setSymptoms] = useState('');
@@ -22,13 +23,17 @@ function Question({ route, navigation }) {
 
   const question = async () => {
     try {
+       const healthprofile = {
+        anychronicdiseases: chronic,
+        anyallergies: serious,
+        anyundergoingtreatment: symptoms,
+        anycurrentmedications: medications,
+       }
+
       const response = await axios.post(
-        `https://c375-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${patientId}`,
+        ` https://6017-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${id.patient_id}`,
         {
-          anychronicdiseases: chronic,
-          anyallergies: serious,
-          anyundergoingtreatment: symptoms,
-          anycurrentmedications: medications,
+          healthprofile2 : healthprofile,
         }
       );
       console.log('response', response);

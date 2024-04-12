@@ -20,9 +20,10 @@ function SignUp({ navigation }): React.JSX.Element {
     console.log("email==", email);
     console.log("password==", password);
     console.log("confirmPassword==", confirmPassword);
+    let data;
 
     try {
-      const response = await axios.post("http://54.227.167.241:5000/user/signup", {
+      const response = await axios.post("https://6017-14-139-109-130.ngrok-free.app/user/signup", {
         // name: username,
         // email: email,
         // password: password,
@@ -34,7 +35,21 @@ function SignUp({ navigation }): React.JSX.Element {
       });
       // Navigate to login screen after successful signup
       console.log("response==", response);
-      navigation.navigate("Login");
+      console.log("data--=",response.data);
+      data = response.data.user;
+
+      try{
+        const resp =  await axios.post("https://6017-14-139-109-130.ngrok-free.app/patient/add" , {
+        firstName: data.name,
+        userId: data._id,
+        mobileNumber: 787878788878,
+       });
+       console.log("resp==", resp);
+       navigation.navigate("Login");
+      }catch(err){
+        console.log(err);
+      }
+    
     } catch (error) {
       console.log("error==", error);
     }

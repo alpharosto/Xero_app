@@ -20,7 +20,7 @@ function Login({ navigation }): React.JSX.Element {
     console.log('name==', username);
     console.log('password==', password);
     try {
-      const response = await axios.post('http://54.227.167.241:5000/user/login', {
+      const response = await axios.post('https://6017-14-139-109-130.ngrok-free.app/user/login', {
         email: username,
         password: password,
       });

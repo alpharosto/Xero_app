@@ -1,5 +1,6 @@
 const User = require("../model/user");
 const { isEmail } = require("validator");
+const Patient = require("../model/patient")
 // const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -80,6 +81,7 @@ const login_post = async (req, res) => {
   // check if email exists in DB!
   const dbUser = await User.findOne({ email: email }).exec();
   console.log("dbUser", dbUser);
+  const patient = await Patient.findOne({userId : dbUser._id}).exec();
   if (dbUser) {
     if (password === dbUser.password) {
       res.json({
@@ -88,7 +90,7 @@ const login_post = async (req, res) => {
           _id: dbUser._id,
           name: dbUser.name,
           email: dbUser.email,
-          role: dbUser.role,
+          patient_id:patient._id,
         },
       });
     } else {

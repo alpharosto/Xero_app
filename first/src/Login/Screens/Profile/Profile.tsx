@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
@@ -10,21 +11,23 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 
 export default function Profile({ route, navigation  }) {
   const { feedData } = route.params || {};
-  console.log("feeddata===",feedData);
+  // console.log("feeddata===",feedData);
 
-  const [data, setData] = useState();
-  const [healthprofile, setHealthprofile] = useState();
+  const [data, setData] = useState({});
+  const [healthprofile, setHealthprofile] = useState([]);
+  const [healthprofile2, setHealthprofile2] = useState([]);
 
 
   const profiledata = async () => {
     try {
-      const id  =  feedData._id;
       const response = await axios.get(
-        'http://localhost:5000/patient/' + id
+        'https://6017-14-139-109-130.ngrok-free.app/patient/' + feedData.patient_id
       );
       console.log("respoce==", response);
+      console.log("data==", response.data.patient);
       setData(response.data.patient);
-      setHealthprofile(response.data.patient.healthprofile2[0]);
+      setHealthprofile(response.data.patient.healthprofile[0]);
+      setHealthprofile2(response.data.patient.healthprofile2[0]);
     } catch (err) {
       console.log(err);
     }
@@ -52,49 +55,49 @@ export default function Profile({ route, navigation  }) {
           resizeMode="contain"
         />
      <View style={styles.container}>
-          <Text style={styles.name}>{data?.firstName}</Text>
-          <Text style={styles.number}> {data?.mobileNumber}</Text>
+          <Text style={styles.name}>Name : {data?.firstName}</Text>
+          <Text style={styles.number}>Mobile No : {data?.mobileNumber}</Text>
         </View>
       </View>
       <View style={styles.section}>
         <Text style={styles.subtitle}>Personal:</Text>
-        <Text style={styles.infoText}>{`Gender: Male text `} {patientId}</Text>
-        <Text style={styles.infoText}>{`Adharno:`}</Text>
-        <Text style={styles.infoText}>{`Address: `}</Text>
+        <Text style={styles.infoText}>{`Gender: Male text `} </Text>
+        <Text style={styles.infoText}>{`Adharno:`}{data?.mobileNumber}</Text>
+        <Text style={styles.infoText}>{`Address: `}{data?.mobileNumber}</Text>
       </View>
       <View style={styles.blackLine}></View>
-      {/* <View style={styles.comp1}> */}
+      <View style={styles.comp1}>
         {/* <Text style={styles.title}>Physical :</Text> */}
         <View style={styles.section}>
         <Text style={styles.subtitle}>Physical:</Text>
-        <Text style={styles.infoText}>{`Age: `}{data?.healthprofile?.age}</Text>
+        <Text style={styles.infoText}>{`Age: `}{healthprofile?.age}</Text>
         <Text style={styles.infoText}>{`Weight:  kg`} {data?.healthprofile?.weight} kg</Text>
         <Text style={styles.infoText}>{`Height:  cm`} {data?.healthprofile?.height} cm</Text>
         <Text style={styles.infoText}>{`Disability: `}{data?.healthprofile?.anydisabilities}</Text>
         <Text style={styles.infoText}>{`Bloodgroup: `}  {data?.healthprofile?.bloodGroup}</Text>
-      {/* </View> */}
+      </View>
       </View>
       <View style={styles.blackLine} />
-      <View style={styles.section}>
+      {/* <View style={styles.section}>
         <Text style={styles.subtitle}>Emergency Contact details:</Text>
-        <Text style={styles.infoText}>       {data?.emergencycontact?.contact1?.name}: 91{" "}
+        <Text style={styles.infoText}>   
+            {data?.emergencycontact?.contact1?.name}: 91{" "}
           {data?.emergencycontact?.contact1?.number}
           </Text>
         <Text style={styles.infoText}>
         {data?.emergencycontact?.contact2?.name}: 91{" "}
           {data?.emergencycontact?.contact2?.number}
         </Text>
-      </View>
+      </View> */}
       <View style={styles.blackLine} />
       <View style={styles.section}>
         <Text style={styles.subtitle}>Medical history: </Text>
-        <Text style={styles.infoText}>Disease:{healthprofile?.anychronicdiseases} </Text>
-        <Text style={styles.infoText}>Allergy: {healthprofile?.anyallergies} </Text>
-        <Text style={styles.infoText}>Current edicine:{healthprofile?.anyundergoingtreatment} </Text>
-        <Text style={styles.infoText}>Undergoing Treatment  {healthprofile?.anycurrentmedications}</Text>
+        <Text style={styles.infoText}>Disease:{healthprofile2?.anychronicdiseases} </Text>
+        <Text style={styles.infoText}>Allergy: {healthprofile2?.anyallergies} </Text>
+        <Text style={styles.infoText}>Current edicine:{healthprofile2?.anyundergoingtreatment} </Text>
+        <Text style={styles.infoText}>Undergoing Treatment  {healthprofile2?.anycurrentmedications}</Text>
       </View>
     </View>
-    
 
   );
 

@@ -18,6 +18,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import Dashboard from './src/Login/Dashboard/Dashboard';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Emergency from './src/Login/Screens/Emergency/Emergency';
 
 
 
@@ -55,6 +56,7 @@ function App(): React.JSX.Element {
     //  <Question/>
     // <Dashboard/>
     // <Profile/>
+    // <Emergency/>
     //  <HealthProfile/>
     // <Bottomtab/>
     //  <Bottomtab/>
@@ -68,9 +70,11 @@ function App(): React.JSX.Element {
         <Stack.Screen name="Tab" component={Tab} 
         options={{
         headerShown : false
-      }} />
+      }} 
+      />
         <Stack.Screen name="Question" component={Question} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Emergency" component={Emergency} />
       </Stack.Navigator>
     </NavigationContainer>
   );

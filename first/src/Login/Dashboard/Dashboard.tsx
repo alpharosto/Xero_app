@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable eol-last */
@@ -7,7 +9,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-`unused-vars */
 /* eslint-disable prettier/prettier */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ const Dashboard = ({ route ,navigation}) =>{
   // console.log("data1", id);
   const { feedData } = route.params || {};
   console.log("feeddata==",feedData);
-  const [healthprofile, setHealthprofile] = useState({});
+  // const [healthprofile, setHealthprofile] = useState({});
 
   // useEffect(() => {
   //   profiledata();
@@ -44,7 +45,7 @@ const Dashboard = ({ route ,navigation}) =>{
   const sos = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/send_message',
+        'https://6017-14-139-109-130.ngrok-free.app/api/send_message',
         {
           to_numbers: [
             '+919352894822',
@@ -112,12 +113,17 @@ const Dashboard = ({ route ,navigation}) =>{
         </View>
         <View style={styles.div13}>
           <View style={styles.div14}>
-          
-            <Text style={styles.div15}>News</Text>
+            <Pressable onPress={() =>{
+               navigation.navigate("Emergency", {
+                id : feedData,
+              });
+            }}>
+            <Text style={styles.div15}>Add Emergency Contact</Text>
+            </Pressable>
           </View>
           <View style={styles.div16}>
   
-            <Text >Pharmacy</Text>
+            <Text>Pharmacy</Text>
           </View>
         </View>
       </View>
@@ -218,7 +224,7 @@ const styles = StyleSheet.create({
   div10: {
     fontFamily: "Gilroy, sans-serif",
     // color:red
-    marginTop: 19,
+    // marginTop: 19,
   },
   div11: {
     backgroundColor: "#d8d4fe",
