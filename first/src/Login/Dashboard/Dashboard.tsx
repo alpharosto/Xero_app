@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable comma-dangle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
@@ -45,7 +46,7 @@ const Dashboard = ({ route ,navigation}) =>{
   const sos = async () => {
     try {
       const response = await axios.post(
-        'https://6017-14-139-109-130.ngrok-free.app/api/send_message',
+        'https://8696-14-139-109-130.ngrok-free.app/api/send_message',
         {
           to_numbers: [
             '+919352894822',
@@ -97,33 +98,51 @@ const Dashboard = ({ route ,navigation}) =>{
         {/* </View> */}
         <View style={styles.div8}>
           <View style={styles.div9}>
-           
+          <Image
+          source={require('./icon1.png')}
+          style={styles.icon}
+        />
             <Text style={styles.div10}>SOS</Text>
           </View>
           <View style={styles.div11}>
+          <Image
+          source={require('./icon2.png')}
+          style={styles.icon}
+        />
           <Pressable 
           onPress={() => {
             navigation.navigate("HealthProfile" , {
               id : feedData,
             });
           }}>
-            <Text>Add Medical History</Text>
+            <Text style={styles.div18}>Add Medical History</Text>
           </Pressable>
           </View>
         </View>
         <View style={styles.div13}>
           <View style={styles.div14}>
+          <Image
+          source={require('./icon3.png')}
+          style={styles.icon}
+        />
             <Pressable onPress={() =>{
                navigation.navigate("Emergency", {
                 id : feedData,
               });
             }}>
-            <Text style={styles.div15}>Add Emergency Contact</Text>
+            <Text style={styles.div15}>
+              Add Emergency Contact</Text>
             </Pressable>
           </View>
           <View style={styles.div16}>
   
-            <Text>Pharmacy</Text>
+            
+            <Image
+          source={require('./icon4.png')}
+          style={styles.icon}
+        />
+        <Text style={styles.div17} >
+              Pharmacy</Text>
           </View>
         </View>
       </View>
@@ -158,6 +177,10 @@ const styles = StyleSheet.create({
     height: 48, // Adjust as needed
     aspectRatio: 1,
     alignSelf: "center",
+  },
+  icon:{
+    width: 48,
+    height: 48,
   },
   div3: {
     flexDirection: "column",
@@ -210,11 +233,15 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     flexDirection: "column",
     flex: 1,
+    // flexDirection: 'row',
+    alignItems: 'center',
+    height:140,
+width:400,
     // paddingVertical: 25,
     margin: 15,
-    padding: 40,
+    padding: 25,
     // paddingHorizontal: 48,
-    alignItems: "center",
+   
   },
   img2: {
     width: 64,
@@ -222,7 +249,10 @@ const styles = StyleSheet.create({
     // alignSelf: "center",
   },
   div10: {
-    fontFamily: "Gilroy, sans-serif",
+    // fontFamily: "Gilroy, sans-serif",
+    fontSize:28,
+    // fontStyle:'bold',
+    fontWeight: 'bold',
     // color:red
     // marginTop: 19,
   },
@@ -231,8 +261,11 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     flexDirection: "column",
     flex: 1,
+ 
     margin: 15,
-    padding: 40,
+    height:140,
+width:400,
+    padding: 25,
     alignItems: "center",
   },
   img3: {
@@ -256,8 +289,10 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     flexDirection: "column",
     flex: 1,
+    height:140,
+    width:400,
     margin: 15,
-    padding: 40,
+    padding: 25,
     alignItems: "center",
   },
   img4: {
@@ -267,8 +302,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   div15: {
-    fontFamily: "Gilroy, sans-serif",
-    marginTop: 19,
+    fontSize:12,
+    color:'#fff',
+    // fontStyle:'bold',
+    fontWeight: 'bold',
+  },
+  div17: {
+    fontSize:12,
+    color:'#fff',
+    // fontStyle:'bold',
+    fontWeight: 'bold',
+  },
+  div18: {
+    fontSize:12,
+    color:'#fff',
+    // fontStyle:'bold',
+    fontWeight: 'bold',
   },
   div16: {
     backgroundColor: "#c4f4e4",
@@ -276,7 +325,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     margin: 15,
-    padding: 40,
+    height:140,
+    width:400,
+    padding: 25,
     alignItems: "center",
   },
   img5: {
@@ -285,10 +336,10 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     alignSelf: "center",
   },
-  div17: {
-    fontFamily: "Gilroy, sans-serif",
-    marginTop: 19,
-  },
+  // div17: {
+  //   fontFamily: "Gilroy, sans-serif",
+  //   marginTop: 19,
+  // },
   image: {
     width: 50,
     height: 50,

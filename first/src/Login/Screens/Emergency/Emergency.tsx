@@ -24,7 +24,7 @@ function Emergency({route}) {
   const profiledata = async () => {
     try {
       const response = await axios.get(
-        'https://6017-14-139-109-130.ngrok-free.app/patient/' + id.patient_id
+        'https://8696-14-139-109-130.ngrok-free.app/patient/' + id.patient_id
       );
       console.log("respoce==", response);
       console.log("data==", response.data.patient);
@@ -50,13 +50,17 @@ function Emergency({route}) {
     };
 
     try{
-      const responce = await axios.post("https://6017-14-139-109-130.ngrok-free.app/patient/addemergencycontact/" + id.patient_id ,
+      const responce = await axios.post("https://8696-14-139-109-130.ngrok-free.app/patient/addemergencycontact/" + id.patient_id ,
        {
-                       contact,
+           contact,
+
       });
 
       console.log("responce", responce); 
       profiledata();
+      setname('');
+      setNumber('');
+      setRelation('');
     }
     catch(error) {
       console.log("errror==" , error);
@@ -67,18 +71,20 @@ function Emergency({route}) {
   const renderItem = ({item}: {item: ItemData}) => {
     return (
      <View>
-      <Text> Name : {item.name}  </Text>
-      <Text> Number : {item.number} </Text>
-      <Text> Relation : {item.relation_to_patient} </Text>
+      <Text  style={styles.List} > Name : {item.name}  </Text>
+      <Text style={styles.List}> Number : {item.number} </Text>
+      <Text style={styles.List}> Relation : {item.relation_to_patient} </Text>
      </View>
     );
   };
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.relationContainer}>      
-        <View>
-          <Text style={styles.address}>Emergency Contact</Text>
+       <Text style={styles.address}>Emergency Contact :</Text> 
+      <View style={styles.relationContainer}>     
+     
+        {/* <View> */}
+          
           <TextInput
             style={styles.relationInput}
             placeholder="Enter your Name"
@@ -103,7 +109,7 @@ function Emergency({route}) {
               setRelation(e);
             }}           
           />
-        </View>    
+        {/* </View>     */}
       </View>
       <TouchableOpacity style={styles.button} onPress={() =>
       emergencycontact()
@@ -115,22 +121,37 @@ function Emergency({route}) {
       <View style={styles.infoContainer}>
         <Text style={styles.emergencyText}>List of Emergency number</Text>
       </View>
-      <View>
+   
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
       />
-      </View>
+   
+     
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+
+  List:{
+    fontWeight: 'bold',
+     color:'black',
+  },
     address: {
-        fontWeight: 'bold',
-        color:"black",
-        marginBottom: 5,
+      fontSize: 20,
+      color: '#00BFFF',
+      fontWeight: 'bold',
+      marginBottom: 10,
+      },
+      item: {
+        padding: 10,
+        marginTop: 2,
+        backgroundColor: '#f9c2ff',
+      },
+      text: {
+        fontSize: 15,
       },
       input: {
         borderWidth: 1,
@@ -187,7 +208,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   relationContainer: {
-    marginTop: 66,
+    marginTop: 6,
     alignItems: 'center',
   },
   relationLabel: {
@@ -198,13 +219,16 @@ const styles = StyleSheet.create({
   },
   relationInput: {
     width: 343,
-    maxWidth: '100%',
-    borderRadius: 10,
-    borderColor: 'rgba(165, 165, 165, 1)',
+    // maxWidth: '100%',
+   
     borderWidth: 1,
-    paddingVertical: 19,
-    paddingHorizontal: 2,
-    marginBottom: 7,
+    // paddingVertical: 19,
+    // paddingHorizontal: 2,
+ 
+    borderColor: 'black',
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingHorizontal: 10,
   },
   continueButton: {
     backgroundColor: '#005cb9',

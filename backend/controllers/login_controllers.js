@@ -85,12 +85,12 @@ const login_post = async (req, res) => {
   if (dbUser) {
     if (password === dbUser.password) {
       res.json({
-        message: "Login Successful",
+        message: "Login Successful  ",
         user: {
           _id: dbUser._id,
           name: dbUser.name,
           email: dbUser.email,
-          patient_id:patient._id,
+          patient_id:dbUser.patient._id,
         },
       });
     } else {

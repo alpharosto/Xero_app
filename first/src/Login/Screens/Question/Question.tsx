@@ -31,7 +31,7 @@ function Question({ route, navigation }) {
        }
 
       const response = await axios.post(
-        ` https://6017-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${id.patient_id}`,
+        `https://8696-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${id.patient_id}`,
         {
           healthprofile2 : healthprofile,
         }
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   main: {
     marginVertical: 20,
     marginHorizontal: 'auto',
-    width: '90%',
+    width: '100%',
   },
   container: {
     margin: 20,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   input: {
     // numberOfLines="2",
     borderWidth: 1,
-    borderColor: '#dcdcdc',
+    borderColor: '#black',
     borderRadius: 10,
     padding: 10,
     
