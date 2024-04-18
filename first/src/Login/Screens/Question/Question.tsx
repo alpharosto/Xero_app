@@ -31,7 +31,7 @@ function Question({ route, navigation }) {
        }
 
       const response = await axios.post(
-        `https://8696-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${id.patient_id}`,
+        `https://5275-14-139-109-130.ngrok-free.app/patient/addhealthprofile2/${id.patient_id}`,
         {
           healthprofile2 : healthprofile,
         }

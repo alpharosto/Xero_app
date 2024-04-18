@@ -21,7 +21,7 @@ export default function Profile({ route, navigation  }) {
   const profiledata = async () => {
     try {
       const response = await axios.get(
-        'https://8696-14-139-109-130.ngrok-free.app/patient/' + feedData.patient_id
+        'https://5275-14-139-109-130.ngrok-free.app/patient/' + feedData.patient_id
       );
       console.log("respoce==", response);
       console.log("data==", response.data.patient);

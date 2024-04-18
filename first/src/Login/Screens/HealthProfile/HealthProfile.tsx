@@ -92,7 +92,7 @@ const HealthProfile = ({navigation , route}) => {
        }
            try {
              const response = await axios.post(
-               `https://8696-14-139-109-130.ngrok-free.app/patient/addhealthprofile/${id.patient_id}`,
+               `https://5275-14-139-109-130.ngrok-free.app/patient/addhealthprofile/${id.patient_id}`,
                {
                 healthprofile : healthprofile,
                });

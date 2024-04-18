@@ -46,7 +46,7 @@ const Dashboard = ({ route ,navigation}) =>{
   const sos = async () => {
     try {
       const response = await axios.post(
-        'https://8696-14-139-109-130.ngrok-free.app/api/send_message',
+        ' https://5275-14-139-109-130.ngrok-free.app/api/send_message',
         {
           to_numbers: [
             '+919352894822',
