@@ -1,6 +1,6 @@
 const User = require("../model/user");
 const { isEmail } = require("validator");
-const Patient = require("../model/patient")
+const Patient = require("../model/patient");
 // const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -81,7 +81,7 @@ const login_post = async (req, res) => {
   // check if email exists in DB!
   const dbUser = await User.findOne({ email: email }).exec();
   console.log("dbUser", dbUser);
-  const patient = await Patient.findOne({userId : dbUser._id}).exec();
+  const patient = await Patient.findOne({ userId: dbUser._id }).exec();
   if (dbUser) {
     if (password === dbUser.password) {
       res.json({
@@ -90,14 +90,14 @@ const login_post = async (req, res) => {
           _id: dbUser._id,
           name: dbUser.name,
           email: dbUser.email,
-          patient_id:dbUser.patient._id,
+          patient_id: patient._id,
         },
       });
     } else {
       res.status(400).json({ message: "Username or Password incorrect" });
     }
   } else {
-    console.log("error")
+    console.log("error");
     res.status(400).json({ message: "Username or Password incorrect" });
   }
 };
